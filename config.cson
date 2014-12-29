@@ -3,3 +3,5 @@ request:
     "Accept-Language" : "*"
     "Accept" : "*/*"
     "User-Agent" : "www2rss"
+feed:
+  generator : "www2rss"

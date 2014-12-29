@@ -6,7 +6,7 @@ cson = require 'cson'
 extend = require 'extend'
 
 feeds = cson.parseFileSync 'feeds.cson'
-config = cson.parseFileSync 'config.cson'
+gconfig = cson.parseFileSync 'config.cson'
 
 generate_feed = (config, html) ->
   if config.regexp.content?
@@ -22,7 +22,11 @@ generate_feed = (config, html) ->
   template = (template, arr) ->
     template.replace /\$([0-9]+)/g, (m, num) -> arr[num]
 
-  feed = new rss config.feed
+  rss_config = extend {}, gconfig.feed,
+    site_url : config.source.url
+  , config.feed
+  
+  feed = new rss rss_config
   # console.log (line[0..20] for line in lines)
   for line in lines
     re = new RegExp config.regexp.item
@@ -47,7 +51,7 @@ for id, feed of feeds
   do (id, feed) ->
     charset = feed.source.charset
 
-    opts = extend {}, config.request,
+    opts = extend {}, gconfig.request,
       url : feed.source.url
     opts.encoding = null if charset?
 
