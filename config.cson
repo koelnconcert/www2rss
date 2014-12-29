@@ -1,0 +1,5 @@
+request:
+  headers :
+    "Accept-Language" : "*"
+    "Accept" : "*/*"
+    "User-Agent" : "www2rss"

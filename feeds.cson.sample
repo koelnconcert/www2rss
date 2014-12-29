@@ -1,0 +1,13 @@
+"wikipedia-did-you-know":
+  source:
+    url: "http://en.wikipedia.org/wiki/Main_Page"
+  regexp:
+    content: "<div id=\"mp-dyk\">([\\s\\S]*?)</td>"
+    split: "<li>"
+    item: "([\\s\\S]*<b>.*?href=\"([^\"]+)\" *title=\"([^\"]+)\"[\\s\\S]*)</li>"
+  feed:
+    title: "Wikipedia - Did you know..."
+  item:
+    title: "$3"
+    url : "http://en.wikipedia.org$2"
+    description: "$1"
